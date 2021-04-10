@@ -13,6 +13,8 @@ const App = (): JSX.Element => {
 
   const [otherState] = useState('otherState!!!!');
 
+  const [showPersonsState, setShowPersonsState] = useState(false);
+
   const switchNameHandler = (newName: string): void => {
     setPersonState({
       persons: [
@@ -21,6 +23,10 @@ const App = (): JSX.Element => {
         { name: 'apple2', age: 73 },
       ],
     });
+  };
+
+  const togglePersonsHandler = () => {
+    setShowPersonsState(!showPersonsState);
   };
 
   const nameChangedHandler = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -33,25 +39,39 @@ const App = (): JSX.Element => {
     });
   };
 
+  const style = {
+    backgroundColor: 'white',
+    font: 'inherit',
+    border: '1px solid blue',
+    padding: '8px',
+    cursor: 'pointer',
+  };
+
   return (
     <div className="App">
       <h1>hello react app {otherState}</h1>
-      <button onClick={switchNameHandler.bind(this, 'aa')}>Switch Name</button>
-      <Person
-        name={personState.persons[0].name}
-        age={personState.persons[0].age}
-      />
-      <Person
-        name={personState.persons[1].name}
-        age={personState.persons[1].age}
-        click={switchNameHandler.bind(this, 'bbbb')}
-        changed={nameChangedHandler}>
-        yahooooo!
-      </Person>
-      <Person
-        name={personState.persons[2].name}
-        age={personState.persons[2].age}
-      />
+      <button style={style} onClick={togglePersonsHandler}>
+        Toggle Persons
+      </button>
+      {showPersonsState ? (
+        <div>
+          <Person
+            name={personState.persons[0].name}
+            age={personState.persons[0].age}
+          />
+          <Person
+            name={personState.persons[1].name}
+            age={personState.persons[1].age}
+            click={switchNameHandler.bind(this, 'bbbb')}
+            changed={nameChangedHandler}>
+            yahooooo!
+          </Person>
+          <Person
+            name={personState.persons[2].name}
+            age={personState.persons[2].age}
+          />
+        </div>
+      ) : null}
     </div>
   );
 };

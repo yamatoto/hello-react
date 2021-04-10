@@ -1,4 +1,5 @@
 import React from 'react';
+import './Person.css';
 
 interface PersonProps {
   name: string;
@@ -10,12 +11,12 @@ interface PersonProps {
 
 const Person = (props: PersonProps): JSX.Element => {
   return (
-    <div>
+    <div className="Person">
       <p onClick={props.click}>
         I&apos;m a {props.name}, and I&apos; {props.age} years old.
       </p>
       <p>{props.children}</p>
-      <input type="text" onChange={props.changed} />
+      <input type="text" onChange={props.changed} value={props.name} />
     </div>
   );
 };
